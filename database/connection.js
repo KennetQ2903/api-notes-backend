@@ -7,3 +7,8 @@ mongoose.connect(connectionString).then(() => {
 }).catch(err => {
   console.log(`Database connection error: ${err}`)
 })
+
+process.on('uncaughtException', () => {
+  console.log('Error en el proceso, cerrando conexion')
+  mongoose.connection.close()
+})
